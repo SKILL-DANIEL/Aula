@@ -1,0 +1,15 @@
+{
+    "autoload": {
+        "psr-4": {
+            "MVC\\": "controller/",
+            "Smarty\\": "src/vendor/smarty/smarty/",
+            "MysqliDb\\": "src/vendor/thingengineer/mysqli-database-class/"
+
+        }
+    },
+    "require": {
+        "smarty/smarty": "^4.3",
+        "thingengineer/mysqli-database-class": "^2.9",
+        "vlucas/phpdotenv": "^5.5"
+    }
+}
