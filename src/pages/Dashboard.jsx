@@ -1,12 +1,17 @@
 /* eslint-disable no-unused-expressions */
 import { React } from 'react';
-import "../css/styleDashboard.css";
-import { NavBar } from '../NavBar';
+import { NavBar } from '../components/NavBar';
+import { Outlet } from 'react-router';
 
 export const Dashboard = () => {
     return (
         <>
             <NavBar/>
+            <main className='container'>
+                <Outlet/>
+            </main>
+            <footer>
+            </footer>
         </>
     );
 };

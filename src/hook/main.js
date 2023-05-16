@@ -1,7 +1,10 @@
 import axios from 'axios';
 import Swal from 'sweetalert2/dist/sweetalert2';
 
-const sendData = async (id) => {
+const controller = 'http://localhost/proyecto-final/controller/controller.php';
+const login = 'http://localhost/proyecto-final/controller/login.php';
+
+const sendDataLogin = async (id) => {
     try {
         if (id === '') {
             Swal.fire({
@@ -11,7 +14,7 @@ const sendData = async (id) => {
             });
             return false;
         }
-        const { data } = await axios.post('http://localhost/proyecto-final/controller/login.php', {action: "loginUser", id}, {headers: {'Content-Type': 'multipart/form-data'}})
+        const { data } = await axios.post(login, {action: "loginUser", id}, {headers: {'Content-Type': 'multipart/form-data'}})
         if (!data.isLogin) {
             const {type, title, text} = data.alert;
             Swal.fire({ 
@@ -33,7 +36,7 @@ const sendData = async (id) => {
 
 const getData = async (state) => {
     try {
-        const { data } = await axios.post('http://localhost/proyecto-final/controller/controller.php', {id: 1}, {headers: {'Content-Type': 'multipart/form-data'}})
+        const { data } = await axios.post(controller, {id: 1}, {headers: {'Content-Type': 'multipart/form-data'}})
         const horario = {};
         data.forEach(carga => {
             const { subject, day, hour } = carga;
@@ -50,7 +53,13 @@ const getData = async (state) => {
     }
 }
 
+const logOut = () => {
+    localStorage.removeItem('isLogin');
+    localStorage.removeItem('infoUser');
+}
+
 export {
-    sendData,
-    getData
+    sendDataLogin,
+    getData,
+    logOut
 }

@@ -1,32 +1,23 @@
 /* eslint-disable no-unused-expressions */
 import { React } from 'react';
-import { sendData } from '../hook/main';
+import { sendDataLogin } from '../hook/main';
 import "../css/styleLogin.css";
 import { useForm } from '../hook/useForm';
 import { useNavigate } from 'react-router';
 export const Login = () =>  {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    const { id, onInputChange, onResetForm } = useForm({
-        id: ''
-    })
+    const { id, onInputChange, onResetForm } = useForm({ id: '' });
 
     const onLogin = async(e)  => {
         e.preventDefault();
-        let response = await sendData(id);
+        let response = await sendDataLogin(id);
         if (response) {
             const {isLogin, infoUser, location} = response;
-            navigate(location,{
-                replace: true,
-                state: {
-                    logged: isLogin,
-                    id: infoUser.identification,
-                    name: infoUser.name,
-                    profile: infoUser.profile,
-                    profileDescription: infoUser.profileDescription
-                }
-            });
+            localStorage.setItem('isLogin', isLogin); 
+            localStorage.setItem('infoUser', JSON.stringify(infoUser)); 
+            navigate(location);
             onResetForm();
         }
     }

@@ -1,2 +1,6 @@
 export * from './Dashboard'
 export * from './login'
+export * from './Home'
+export * from './Schedule'
+export * from './Aula'
+export * from './NotFound'
